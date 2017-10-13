@@ -4,7 +4,28 @@
   <url>
     <loc>http://yoursite.com/2017/10/12/hello-my-blog/</loc>
     
-    <lastmod>2017-10-12T08:01:28.820Z</lastmod>
+    <lastmod>2017-10-13T15:50:30.909Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/index.html</loc>
+    
+    <lastmod>2017-10-13T15:49:28.910Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2017/10/10/hello-world/</loc>
+    
+    <lastmod>2017-10-13T15:47:46.080Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/about/index.html</loc>
+    
+    <lastmod>2017-10-13T15:43:59.699Z</lastmod>
     
   </url>
   
@@ -12,20 +33,6 @@
     <loc>http://yoursite.com/categories/index.html</loc>
     
     <lastmod>2017-10-12T07:42:29.801Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2017/10/10/hello-world/</loc>
-    
-    <lastmod>2017-10-12T04:39:16.917Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/index.html</loc>
-    
-    <lastmod>2017-10-12T04:09:42.808Z</lastmod>
     
   </url>
   
