@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[hello,my blog]]></title>
     <url>%2F2017%2F10%2F12%2Fhello-my-blog%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.]]></content>
+    <content type="text"><![CDATA[前言最近在知乎上面随便浏览一些和编程相关的东西，然后发现一些非常有意思的现象，大牛们都喜欢动不动将他们的GitHub账号show出来，emmm，还有他们的博客（有博客园、GitHub pages等等的），突然萌生一种想一边学一边写的想法，虽然本人小白一个，写得也不咋地，随便写写，笔耕不辍嘛。对比完博客园后，发现基于GitHub的博客简直是一股清流，Markdown是种轻量级的标记语言，语法很少很简单，这意味这什么？它注重的是文字编辑而不是语法，然后小白就可以愉快的写博客了呀(๑•̀ㅂ•́) ✧ Hello,my blog布衣经过3天的艰苦奋斗，不食不眠，终于将博客的主题配置，各种插件搭配安装好了，emmmm，这种感觉就像是刚入门编程这个大坑，打出Hello World时的那种激动，只不过如今是Hello,my blog（叹息）小小的希望，自己能够在繁忙的时间抽身出来写写博客（虽然内容不咋地），在未来日子里面真的可以说一声Hello 起航至何方emmm讲道理，我建立这个博客更多的是想帮自己建立一个World，能够对他说一声Hello，假如说，你们在读完我的博客觉得没意思，取关的话，完全没问题的，毕竟技术牛的博客数都数不过来，况且写博更多的是记录自己，自己喜欢怎么改怎么写就怎么做嘛，又或者说，一万个假如，你们在我的博客里面看到一些未成看到或者已经快忘记的东西，它们帮你们在编程上面节省了时间，那这就是我最大的动力了，腾多点时间出来，远离代码，跑跑步，看看电影之类的，岂不是美滋滋？ 关于作者作者就是个白衣]]></content>
       <categories>
         <category>其他</category>
       </categories>
