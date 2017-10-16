@@ -1,76 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-    
-    <entry>
-      <title><![CDATA[数据库系统概念]]></title>
-      <url>/2017/10/16/DSC1/</url>
-      <content type="html"><![CDATA[<p>生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞</p>
-]]></content>
-      
-        <categories>
-            
-            <category> 其他 </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[hello,my blog]]></title>
-      <url>/2017/10/12/hello-my-blog/</url>
-      <content type="html"><![CDATA[<p><img src="http://mahua.jser.me/mahua-logo.jpg" alt="mahua"></p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在<a href="https://www.zhihu.com/explore" target="_blank" rel="external">知乎</a>上面随便浏览一些和编程相关的东西，然后发现一些非常有意思的现象，大牛们都喜欢动不动将他们的<a href="https://github.com/" target="_blank" rel="external">GitHub</a>账号show出来，emmm，还有他们的博客（有博客园、GitHub pages等等的），突然萌生一种想一边学一边写的想法，虽然本人小白一个，写得也不咋地，随便写写，笔耕不辍嘛。<br>对比完博客园后，发现基于<a href="https://github.com/" target="_blank" rel="external">GitHub</a>的博客简直是一股清流，Markdown是种轻量级的标记语言，语法很少很简单，这意味这什么？它注重的是文字编辑而不是语法，然后小白就可以愉快的写博客了呀(๑•̀ㅂ•́) ✧</p>
-<h2 id="Hello-my-blog"><a href="#Hello-my-blog" class="headerlink" title="Hello,my blog"></a>Hello,my blog</h2><p>布衣经过3天的艰苦奋斗，不食不眠，终于将博客的主题配置，各种插件搭配安装好了，emmmm，这种感觉就像是刚入门编程这个大坑，打出<strong>Hello World</strong>时的那种激动，只不过如今是Hello,my blog（叹息）小小的希望，自己能够在繁忙的时间抽身出来写写博客（虽然内容不咋地），在未来日子里面真的可以说一声<strong>Hello</strong></p>
-<h2 id="起航至何方"><a href="#起航至何方" class="headerlink" title="起航至何方"></a>起航至何方</h2><p>emmm讲道理，我建立这个博客更多的是想帮自己建立一个<strong>World</strong>，能够对他说一声<strong>Hello</strong>，假如说，你们在读完我的博客觉得没意思，取关的话，完全没问题的，毕竟技术牛的博客数都数不过来，况且写博更多的是记录自己，自己喜欢怎么改怎么写就怎么做嘛，又或者说，一万个假如，你们在我的博客里面看到一些未成看到或者已经快忘记的东西，它们帮你们在编程上面节省了时间，那这就是我最大的动力了，腾多点时间出来，远离代码，跑跑步，看看电影之类的，岂不是美滋滋？</p>
-<h2 id="关于作者"><a href="#关于作者" class="headerlink" title="关于作者"></a>关于作者</h2><p><a href="http://williamywh.github.io/about/">作者就是个白衣</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> 其他 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> &lt;font size=5 color=red&gt;First&lt;/font&gt; </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Hello World]]></title>
-      <url>/2017/10/10/hello-world/</url>
-      <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> 其他 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> &lt;font size=6&gt;杂文&lt;/font&gt; </tag>
-            
-        </tags>
-        
-    </entry>
-    
-  
-  
+<search>
+  <entry>
+    <title><![CDATA[数据库系统概念]]></title>
+    <url>%2F2017%2F10%2F16%2FDSC1%2F</url>
+    <content type="text"><![CDATA[生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[hello,my blog]]></title>
+    <url>%2F2017%2F10%2F12%2Fhello-my-blog%2F</url>
+    <content type="text"><![CDATA[前言最近在知乎上面随便浏览一些和编程相关的东西，然后发现一些非常有意思的现象，大牛们都喜欢动不动将他们的GitHub账号show出来，emmm，还有他们的博客（有博客园、GitHub pages等等的），突然萌生一种想一边学一边写的想法，虽然本人小白一个，写得也不咋地，随便写写，笔耕不辍嘛。对比完博客园后，发现基于GitHub的博客简直是一股清流，Markdown是种轻量级的标记语言，语法很少很简单，这意味这什么？它注重的是文字编辑而不是语法，然后小白就可以愉快的写博客了呀(๑•̀ㅂ•́) ✧ Hello,my blog布衣经过3天的艰苦奋斗，不食不眠，终于将博客的主题配置，各种插件搭配安装好了，emmmm，这种感觉就像是刚入门编程这个大坑，打出Hello World时的那种激动，只不过如今是Hello,my blog（叹息）小小的希望，自己能够在繁忙的时间抽身出来写写博客（虽然内容不咋地），在未来日子里面真的可以说一声Hello 起航至何方emmm讲道理，我建立这个博客更多的是想帮自己建立一个World，能够对他说一声Hello，假如说，你们在读完我的博客觉得没意思，取关的话，完全没问题的，毕竟技术牛的博客数都数不过来，况且写博更多的是记录自己，自己喜欢怎么改怎么写就怎么做嘛，又或者说，一万个假如，你们在我的博客里面看到一些未成看到或者已经快忘记的东西，它们帮你们在编程上面节省了时间，那这就是我最大的动力了，腾多点时间出来，远离代码，跑跑步，看看电影之类的，岂不是美滋滋？ 关于作者作者就是个白衣]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>&lt;font size=5 color=red&gt;First&lt;/font&gt;</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2017%2F10%2F10%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>&lt;font size=6&gt;杂文&lt;/font&gt;</tag>
+      </tags>
+  </entry>
 </search>
