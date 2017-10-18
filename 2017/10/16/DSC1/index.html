@@ -474,8 +474,9 @@
 <li>C：CHECK 约束。</li>
 <li>P：PRIMARY KEY 约束。</li>
 <li>U：UNIQUE 约束。</li>
-<li><p>R：FOREIGN KEY 约束。</p>
-<h5 id="3、有时候在表格中插入或导出大量的数据的时候，可以暂时忽略约束，使数据最大化的流通，待操作完之后可以重新开启约束"><a href="#3、有时候在表格中插入或导出大量的数据的时候，可以暂时忽略约束，使数据最大化的流通，待操作完之后可以重新开启约束" class="headerlink" title="3、有时候在表格中插入或导出大量的数据的时候，可以暂时忽略约束，使数据最大化的流通，待操作完之后可以重新开启约束"></a>3、有时候在表格中插入或导出大量的数据的时候，可以暂时忽略约束，使数据最大化的流通，待操作完之后可以重新开启约束</h5></li>
+<li>R：FOREIGN KEY 约束。</li>
+</ul>
+<h5 id="3、有时候在表格中插入或导出大量的数据的时候，可以暂时忽略约束，使数据最大化的流通，待操作完之后可以重新开启约束"><a href="#3、有时候在表格中插入或导出大量的数据的时候，可以暂时忽略约束，使数据最大化的流通，待操作完之后可以重新开启约束" class="headerlink" title="3、有时候在表格中插入或导出大量的数据的时候，可以暂时忽略约束，使数据最大化的流通，待操作完之后可以重新开启约束"></a>3、有时候在表格中插入或导出大量的数据的时候，可以暂时忽略约束，使数据最大化的流通，待操作完之后可以重新开启约束</h5><ul>
 <li><p>使约束条件失效：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE 表名 DISABLE CONSTRANT 约束名;</div></pre></td></tr></table></figure>
 </li>
@@ -483,8 +484,10 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE 表名 ENABLE CONSTRANT 约束名;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><em>注：使约束条件生效的时候必须使表中所有的元组符合约束条件，否则，会报ERROR</em></p>
-<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><p>  本章主要是有关表的约束条件，具体请看上面（小编要睡午觉了，其实就是偷懒）</p>
+<ul>
+<li>注：使约束条件生效的时候必须使表中所有的元组符合约束条件，否则，会报ERROR *</li>
+</ul>
+<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><p>本章主要是有关表的约束条件，具体请看上面（小编要睡午觉了，其实就是偷懒）</p>
 
       
     </div>
