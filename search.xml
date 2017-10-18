@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[数据库系统概念]]></title>
+    <title><![CDATA[数据库系统概念(一)]]></title>
     <url>%2F2017%2F10%2F16%2FDSC1%2F</url>
-    <content type="text"><![CDATA[生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞]]></content>
+    <content type="text"><![CDATA[注：最近学校在教《Database System Concepts》这本书，又刚好在做这个博客，那就顺手将这个当做一个专题（其实小编的真实意图是做做笔记的qwq） 数据的完整性和约束条件一、数据完整性约束 直白点说，一个稍微大点的project，数据库表的结构一般都不简单，所以建表以后需要有关表的文档，否则，很有可能出现因当前负责这个模块的人离开而后续的开发者接触到这坨表后的一脸懵逼。表的数据有一定得取值范围和约束条件，多表之间更是有一定得参考关系。其中我们可以通过定义约束条件来保证数据的完整性和一致性。数据的完整性又包括数据完整性和参照完整性，数据完整性定义表数据的约束条件，参照完整性定义数据之间的约束条件。数据完整性由主键(PRIMARY KEY)、非空(NOT NULL)、惟一(UNIQUE)和检查(CHECK)约束条件定义，参照完整性由外键(FOREIGN KEY)约束条件定义。 二、表的5种约束 主键(PRIMARY KEY) 非空(NOT NULL) 唯一(UNIQUE) 检查(CHECK) 外键(FOREIGN KEY) 这次主要讲讲外键： 指定表的一列或多列的组合作为外键(一列的称为列级，多列的称为表级)，外键参照指定的主键或惟一键。 两个表含有主键或惟一键的称为主表，定义外键的那张表称为子表，子表参照主表的数据（这就意味着子表的数据来源于主表，子表‘抄袭’主表，子表的数据在主表中一定存在，反之则不一定） 三、外键约束的语法 外键约束的语法如下：第一种语法，如果子记录存在，则不允许删除主记录：[CONSTRANT 约束名] FOREIGN KEY(列名 1,列名 2,…)REFERENCES 表名(列名 1,列名 2,…) 第二种语法，如果子记录存在，则删除主记录时，级联删除子记录：[CONSTRANT 约束名] FOREIGN KEY(列名 1,列名 2,…)REFERENCES 表名(列名 1,列名 2,…)on delete cascade 第三种语法，如果子记录存在，则更新主记录时，级联更新子记录：[CONSTRANT 约束名] FOREIGN KEY(列名 1,列名 2,…)REFERENCES 表名(列名 1,列名2,…)on update cascade （oracle 9i 不支持） 第四种语法，如果子记录存在，则删除主记录时，将子记录置成空：[CONSTRANT 约束名] FOREIGN KEY(列名 1,列名 2,…)REFERENCES 表名(列名 1,列名 2,…)on delete set null 其中的表名为要参照的表名。 注意：CONSTRANT 关键字用来定义约束名，如果省略，则系统自动生成以 SYS_开头的唯一约束名。约束名的作用是当发生违反约束条件的操作时，系统会显示违反的约束条件名称，这样用户就可以了解到发生错误的原因。 四、约束的应用1、可以通过下面的代码来查看表的约束条件 123select constraint_name, constraint_type, search_conditionfrom user_constraintswhere table_name='your table_name' 2、其中CONSTRAINTS_TYPE 显示的约束类型为： C：CHECK 约束。 P：PRIMARY KEY 约束。 U：UNIQUE 约束。 R：FOREIGN KEY 约束。 3、有时候在表格中插入或导出大量的数据的时候，可以暂时忽略约束，使数据最大化的流通，待操作完之后可以重新开启约束 使约束条件失效： 1ALTER TABLE 表名 DISABLE CONSTRANT 约束名; 使约束条件生效： 1ALTER TABLE 表名 ENABLE CONSTRANT 约束名; 注：使约束条件生效的时候必须使表中所有的元组符合约束条件，否则，会报ERROR 五、总结 本章主要是有关表的约束条件，具体请看上面（小编要睡午觉了，其实就是偷懒）]]></content>
       <categories>
-        <category>其他</category>
+        <category>数据库系统概念</category>
       </categories>
+      <tags>
+        <tag>&lt;font size=6&gt;MySQL&lt;/font&gt;</tag>
+        <tag>&lt;font size=6&gt;Oracle&lt;/font&gt;</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[hello,my blog]]></title>
@@ -27,7 +31,7 @@
         <category>其他</category>
       </categories>
       <tags>
-        <tag>&lt;font size=6&gt;杂文&lt;/font&gt;</tag>
+        <tag>&lt;font size=5&gt;杂文&lt;/font&gt;</tag>
       </tags>
   </entry>
 </search>

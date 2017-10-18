@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://williamywh.github.io/2017/10/10/hello-world/</loc>
+    
+    <lastmod>2017-10-18T04:40:57.946Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://williamywh.github.io/about/index.html</loc>
     
     <lastmod>2017-10-16T05:12:27.987Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://williamywh.github.io/2017/10/16/DSC1/</loc>
     
     <lastmod>2017-10-16T03:55:34.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://williamywh.github.io/2017/10/10/hello-world/</loc>
-    
-    <lastmod>2017-10-14T08:20:36.398Z</lastmod>
     
   </url>
   
