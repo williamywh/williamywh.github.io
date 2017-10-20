@@ -461,13 +461,13 @@
 <p>指定表的一列或多列的组合作为外键(一列的称为列级，多列的称为表级)，外键参照指定的主键或惟一键。</p>
 <p>两个表含有主键或惟一键的称为主表，定义外键的那张表称为子表，子表参照主表的数据（这就意味着子表的数据来源于主表，子表‘抄袭’主表，子表的数据在主表中一定存在，反之则不一定）</p>
 <h2 id="三、外键约束的语法"><a href="#三、外键约束的语法" class="headerlink" title="三、外键约束的语法"></a>三、外键约束的语法</h2><blockquote>
-<p>外键约束的语法如下：<br>第一种语法，如果子记录存在，则不允许删除主记录：<br>[CONSTRANT 约束名] FOREIGN KEY(列名 1,列名 2,…)REFERENCES 表名(列名 1,列名 2,…)</p>
-<p>第二种语法，如果子记录存在，则删除主记录时，级联删除子记录：<br>[CONSTRANT 约束名] FOREIGN KEY(列名 1,列名 2,…)REFERENCES 表名(列名 1,列名 2,…)on delete cascade</p>
-<p>第三种语法，如果子记录存在，则更新主记录时，级联更新子记录：<br>[CONSTRANT 约束名] FOREIGN KEY(列名 1,列名 2,…)REFERENCES 表名(列名 1,列名2,…)on update cascade （oracle 9i 不支持）</p>
-<p>第四种语法，如果子记录存在，则删除主记录时，将子记录置成空：<br>[CONSTRANT 约束名] FOREIGN KEY(列名 1,列名 2,…)REFERENCES 表名(列名 1,列名 2,…)on delete set null 其中的表名为要参照的表名。</p>
+<p>外键约束的语法如下：<br>第一种语法，如果子记录存在，则不允许删除主记录：<br>[CONSTRAINT 约束名] FOREIGN KEY(列名 1,列名 2,…)REFERENCES 表名(列名 1,列名 2,…)</p>
+<p>第二种语法，如果子记录存在，则删除主记录时，级联删除子记录：<br>[CONSTRAINT 约束名] FOREIGN KEY(列名 1,列名 2,…)REFERENCES 表名(列名 1,列名 2,…)on delete cascade</p>
+<p>第三种语法，如果子记录存在，则更新主记录时，级联更新子记录：<br>[CONSTRAINT 约束名] FOREIGN KEY(列名 1,列名 2,…)REFERENCES 表名(列名 1,列名2,…)on update cascade （oracle 9i 不支持）</p>
+<p>第四种语法，如果子记录存在，则删除主记录时，将子记录置成空：<br>[CONSTRAINT 约束名] FOREIGN KEY(列名 1,列名 2,…)REFERENCES 表名(列名 1,列名 2,…)on delete set null 其中的表名为要参照的表名。</p>
 </blockquote>
 <ul>
-<li>注意：CONSTRANT 关键字用来定义约束名，如果省略，则系统自动生成以 SYS_开头的唯一约束名。约束名的作用是当发生违反约束条件的操作时，系统会显示违反的约束条件名称，这样用户就可以了解到发生错误的原因。</li>
+<li>注意：CONSTRAINT 关键字用来定义约束名，如果省略，则系统自动生成以 SYS_开头的唯一约束名。约束名的作用是当发生违反约束条件的操作时，系统会显示违反的约束条件名称，这样用户就可以了解到发生错误的原因。</li>
 </ul>
 <h2 id="四、约束的应用"><a href="#四、约束的应用" class="headerlink" title="四、约束的应用"></a>四、约束的应用</h2><h5 id="1、可以通过下面的代码来查看表的约束条件"><a href="#1、可以通过下面的代码来查看表的约束条件" class="headerlink" title="1、可以通过下面的代码来查看表的约束条件"></a>1、可以通过下面的代码来查看表的约束条件</h5>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">select constraint_name, constraint_type, search_condition</div><div class="line">from user_constraints</div><div class="line"><span class="built_in">where</span> table_name=<span class="string">'your table_name'</span></div></pre></td></tr></table></figure>
 <h5 id="2、其中CONSTRAINTS-TYPE-显示的约束类型为："><a href="#2、其中CONSTRAINTS-TYPE-显示的约束类型为：" class="headerlink" title="2、其中CONSTRAINTS_TYPE 显示的约束类型为："></a>2、其中CONSTRAINTS_TYPE 显示的约束类型为：</h5><ul>
@@ -478,10 +478,10 @@
 </ul>
 <h5 id="3、有时候在表格中插入或导出大量的数据的时候，可以暂时忽略约束，使数据最大化的流通，待操作完之后可以重新开启约束"><a href="#3、有时候在表格中插入或导出大量的数据的时候，可以暂时忽略约束，使数据最大化的流通，待操作完之后可以重新开启约束" class="headerlink" title="3、有时候在表格中插入或导出大量的数据的时候，可以暂时忽略约束，使数据最大化的流通，待操作完之后可以重新开启约束"></a>3、有时候在表格中插入或导出大量的数据的时候，可以暂时忽略约束，使数据最大化的流通，待操作完之后可以重新开启约束</h5><ul>
 <li><p>使约束条件失效：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE 表名 DISABLE CONSTRANT 约束名;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE 表名 DISABLE CONSTRAINT 约束名;</div></pre></td></tr></table></figure>
 </li>
 <li><p>使约束条件生效：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE 表名 ENABLE CONSTRANT 约束名;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE 表名 ENABLE CONSTRAINT 约束名;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <ul>
