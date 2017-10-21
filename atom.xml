@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://williamywh.github.io/"/>
-  <updated>2017-10-20T14:25:10.812Z</updated>
+  <updated>2017-10-21T01:30:53.841Z</updated>
   <id>http://williamywh.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>实际开发过程中乱码解决</title>
+    <link href="http://williamywh.github.io/2017/10/21/coding2/"/>
+    <id>http://williamywh.github.io/2017/10/21/coding2/</id>
+    <published>2017-10-21T01:29:34.000Z</published>
+    <updated>2017-10-21T01:30:53.841Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Spring-MVC开发过程中遇到的乱码解决"><a href="#Spring-MVC开发过程中遇到的乱码解决" class="headerlink" title="Spring MVC开发过程中遇到的乱码解决"></a>Spring MVC开发过程中遇到的乱码解决</h2><h3 id="Post乱码"><a href="#Post乱码" class="headerlink" title="Post乱码"></a>Post乱码</h3><p>在页面编码格式中设置为<strong>pageEncoding=”UTF-8”%</strong><br>并且表单的form的提交方式：<strong>method=”post”</strong></p><p>这时候在工程目录下的web.xml添加post乱码过滤器filter<br>在web.xml中加入（代码尽量往前靠）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;filter&gt;</div><div class="line">&lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;</div><div class="line">&lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;</div><div class="line">&lt;init-param&gt;</div><div class="line">&lt;param-name&gt;encoding&lt;/param-name&gt;</div><div class="line">&lt;param-value&gt;utf-8&lt;/param-value&gt;</div><div class="line">&lt;/init-param&gt;</div><div class="line">&lt;/filter&gt;</div><div class="line">&lt;filter-mapping&gt;</div><div class="line">&lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;</div><div class="line">&lt;url-pattern&gt;/*&lt;/url-pattern&gt;</div><div class="line">&lt;/filter-mapping&gt;</div></pre></td></tr></table></figure></p><p>以上可以解决post请求乱码问题</p><h3 id="get请求中文参数乱码"><a href="#get请求中文参数乱码" class="headerlink" title="get请求中文参数乱码"></a>get请求中文参数乱码</h3><h4 id="方法一：对参数进行重新编码"><a href="#方法一：对参数进行重新编码" class="headerlink" title="方法一：对参数进行重新编码"></a>方法一：对参数进行重新编码</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String userName = new String(request.getParamter(<span class="string">"userName"</span>).getBytes(<span class="string">"ISO8859-1"</span>),<span class="string">"utf-8"</span>)</div></pre></td></tr></table></figure><p>其中ISO8859-1是tomcat默认编码，需要将tomcat编码后的内容按utf-8编码</p><p>不过，小编查资料得知，tomcat8以后默认编码格式是utf-8；7之前的都是iso8859-1，不管了，自己可以去tomcat下面验证一下。</p><h4 id="方法二：修改tomcat配置文件"><a href="#方法二：修改tomcat配置文件" class="headerlink" title="方法二：修改tomcat配置文件"></a>方法二：修改tomcat配置文件</h4><p>假如说tomcat8以后默认的编码格式是utf-8，那就是没问题的。<br>如果不是，修改tomcat下的conf/server.xml文件，添加编码与工程编码一致<br>找到下面代码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Connector port=<span class="string">"8080"</span> protocol=<span class="string">"HTTP/1.1"</span> connectionTimeout=<span class="string">"20000"</span> redirectPort=<span class="string">"8443"</span> /&gt;</div></pre></td></tr></table></figure></p><p>这段代码主要是Tomcat监听HTTP请求的端口号等信息<br>添加<strong>URIEncoding=”utf-8”</strong>后变成<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Connector port=<span class="string">"8080"</span>  protocol=<span class="string">"HTTP/1.1"</span> connectionTimeout=<span class="string">"20000"</span> redirectPort=<span class="string">"8443"</span> URIEncoding=<span class="string">"UTF-8"</span> /&gt;</div></pre></td></tr></table></figure></p><h3 id="对于存入数据库后乱码问题"><a href="#对于存入数据库后乱码问题" class="headerlink" title="对于存入数据库后乱码问题"></a>对于存入数据库后乱码问题</h3><p>可以看一看数据库连接池的设置的字符集和数据库本身的编码格式，这里就不水了。</p><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>上面主要是小编自己开发过程遇到乱码后亲测有效的解决办法，如果说，解决不了，可以联系我，一起讨论学习qwq</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Spring-MVC开发过程中遇到的乱码解决&quot;&gt;&lt;a href=&quot;#Spring-MVC开发过程中遇到的乱码解决&quot; class=&quot;headerlink&quot; title=&quot;Spring MVC开发过程中遇到的乱码解决&quot;&gt;&lt;/a&gt;Spring MVC开发过程中遇到的乱码
+      
+    
+    </summary>
+    
+      <category term="乱码" scheme="http://williamywh.github.io/categories/%E4%B9%B1%E7%A0%81/"/>
+    
+    
+      <category term="&lt;font size=6&gt;Java乱码&lt;/font&gt;" scheme="http://williamywh.github.io/tags/font-size-6-Java%E4%B9%B1%E7%A0%81-font/"/>
+    
+  </entry>
   
   <entry>
     <title>浅谈Java乱码</title>
