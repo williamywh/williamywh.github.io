@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="<font size=6>Java乱码</font>," />
+  <meta name="keywords" content="<font size=6>Java 8</font>," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="编程初学者，可能在刚开发的时候，总会遇到一些‘神奇’的问题，比如字符乱码。本章就是小编水析Java编码的时候啦。 编码小故事计算机最先在美国开始投入使用，他们需要用一些bit组合来表示不同的状态，他们发现一个字节有8个bit能代表256种不同的状态，大家于是乎他这称为‘Ascii’编码。后来计算机在世界范围内流行起来，1个字节早已经不能满足全世界各种语言字符编码的要求了。但是这难不倒聪明的中国人，">
-<meta name="keywords" content="&lt;font size=6&gt;Java乱码&lt;&#x2F;font&gt;">
+<meta name="description" content="小编农事训练了一周，咸鱼了一周，一直心心念念着我没有更博，这不，小编给你们带来了水析Java 8，Java 8这个专题分为4章，本章末给出学习J8（原谅我简称它）最好的学习资料—-官方文档  Java 8新特性（一）J8在2014年就发布了，J9如今也出了，更新的速度赶上坐飞机了，知乎上面有人调侃，还在研究J5、6的源码，甚至有大神调侃，用J8重构之前的项目，会出现摸不着头脑的bug，把JDK换">
+<meta name="keywords" content="&lt;font size=6&gt;Java 8&lt;&#x2F;font&gt;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈Java乱码">
-<meta property="og:url" content="http://williamywh.github.io/2017/10/20/coding/index.html">
+<meta property="og:title" content="Java 8新特性（一）">
+<meta property="og:url" content="http://williamywh.github.io/2017/10/29/J8/index.html">
 <meta property="og:site_name" content="Wuliviki&#39;s world">
-<meta property="og:description" content="编程初学者，可能在刚开发的时候，总会遇到一些‘神奇’的问题，比如字符乱码。本章就是小编水析Java编码的时候啦。 编码小故事计算机最先在美国开始投入使用，他们需要用一些bit组合来表示不同的状态，他们发现一个字节有8个bit能代表256种不同的状态，大家于是乎他这称为‘Ascii’编码。后来计算机在世界范围内流行起来，1个字节早已经不能满足全世界各种语言字符编码的要求了。但是这难不倒聪明的中国人，">
+<meta property="og:description" content="小编农事训练了一周，咸鱼了一周，一直心心念念着我没有更博，这不，小编给你们带来了水析Java 8，Java 8这个专题分为4章，本章末给出学习J8（原谅我简称它）最好的学习资料—-官方文档  Java 8新特性（一）J8在2014年就发布了，J9如今也出了，更新的速度赶上坐飞机了，知乎上面有人调侃，还在研究J5、6的源码，甚至有大神调侃，用J8重构之前的项目，会出现摸不着头脑的bug，把JDK换">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-20T14:25:10.812Z">
+<meta property="og:updated_time" content="2017-10-29T16:17:02.296Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅谈Java乱码">
-<meta name="twitter:description" content="编程初学者，可能在刚开发的时候，总会遇到一些‘神奇’的问题，比如字符乱码。本章就是小编水析Java编码的时候啦。 编码小故事计算机最先在美国开始投入使用，他们需要用一些bit组合来表示不同的状态，他们发现一个字节有8个bit能代表256种不同的状态，大家于是乎他这称为‘Ascii’编码。后来计算机在世界范围内流行起来，1个字节早已经不能满足全世界各种语言字符编码的要求了。但是这难不倒聪明的中国人，">
+<meta name="twitter:title" content="Java 8新特性（一）">
+<meta name="twitter:description" content="小编农事训练了一周，咸鱼了一周，一直心心念念着我没有更博，这不，小编给你们带来了水析Java 8，Java 8这个专题分为4章，本章末给出学习J8（原谅我简称它）最好的学习资料—-官方文档  Java 8新特性（一）J8在2014年就发布了，J9如今也出了，更新的速度赶上坐飞机了，知乎上面有人调侃，还在研究J5、6的源码，甚至有大神调侃，用J8重构之前的项目，会出现摸不着头脑的bug，把JDK换">
 
 
 
@@ -122,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="http://williamywh.github.io/2017/10/20/coding/"/>
+  <link rel="canonical" href="http://williamywh.github.io/2017/10/29/J8/"/>
 
 
 
@@ -144,7 +144,7 @@
     }
 </style>
 
-  <title>浅谈Java乱码 | Wuliviki's world</title>
+  <title>Java 8新特性（一） | Wuliviki's world</title>
   
 
 
@@ -335,7 +335,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://williamywh.github.io/2017/10/20/coding/">
+    <link itemprop="mainEntityOfPage" href="http://williamywh.github.io/2017/10/29/J8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="尹文辉">
@@ -352,7 +352,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">浅谈Java乱码</h1>
+          <h1 class="post-title" itemprop="name headline">Java 8新特性（一）</h1>
         
 
         <div class="post-meta">
@@ -364,8 +364,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-20T18:42:46+08:00">
-                2017-10-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-29T23:44:57+08:00">
+                2017-10-29
               </time>
             
 
@@ -387,8 +387,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/乱码/" itemprop="url" rel="index">
-                    <span itemprop="name">乱码</span>
+                  <a href="/categories/Java-8/" itemprop="url" rel="index">
+                    <span itemprop="name">Java 8</span>
                   </a>
                 </span>
 
@@ -446,34 +446,77 @@
       
 
       
-        <p>编程初学者，可能在刚开发的时候，总会遇到一些‘神奇’的问题，比如字符乱码。本章就是小编水析Java编码的时候啦。</p>
-<h2 id="编码小故事"><a href="#编码小故事" class="headerlink" title="编码小故事"></a>编码小故事</h2><p>计算机最先在美国开始投入使用，他们需要用一些bit组合来表示不同的状态，他们发现一个字节有8个bit能代表256种不同的状态，大家于是乎他这称为‘Ascii’编码。后来计算机在世界范围内流行起来，1个字节早已经不能满足全世界各种语言字符编码的要求了。但是这难不倒聪明的中国人，我们改装编码方式，用2个字节重新进行编码，这就是常说的‘全角’字符。于是乎，称这种方案为‘gb2312’，之后，发展GBK到gb18030，都是汉字编码的发展历程，统称‘双字节字符集’。<br>不难想象，各国都搞自己那一套编码方案，到头来就只有一个结果–大家一起来乱码。最后，一个ISO组织出来收拾烂摊子，重新搞一个支持全球字符的统一编码，称为‘unicode’。unicode统一规定，用16位表示所有字符，这就意味着Ascii的那些‘半角’字符也需要2个字节，导致浪费了一半的空间，这下，美国人可不乐意了，凭什么？！<br>直到了UTF-8的出现，它最大的特点就是它是一种变长的编码方式。这就意味这Ascii还是一个字节表示，但是utf-8一个汉字一般占3个字节，这下差不多皆大欢喜了。</p>
-<h2 id="场景一：ISO-8859-1与UTF-8"><a href="#场景一：ISO-8859-1与UTF-8" class="headerlink" title="场景一：ISO-8859-1与UTF-8"></a>场景一：ISO-8859-1与UTF-8</h2><blockquote>
-<p>注：ISO-8859-1编码是单字节编码，向下兼容ASCII，是ASCII的扩展。</p>
+        <blockquote>
+<p>小编农事训练了一周，咸鱼了一周，一直心心念念着我没有更博，这不，小编给你们带来了水析Java 8，Java 8这个专题分为4章，本章末给出学习J8（原谅我简称它）最好的学习资料—-官方文档</p>
 </blockquote>
-<p>直接上代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">String string1 = <span class="string">"编码"</span>;</div><div class="line">System.out.println(<span class="string">"初始化unicode字符串:"</span>+string1);</div><div class="line">byte[] byteList1 = string1.getBytes(<span class="string">"utf-8"</span>);</div><div class="line">String string2 = new String(byteList1,<span class="string">"ISO-8859-1"</span>);</div><div class="line">System.out.println(<span class="string">"转成ISO-8859-1乱码:"</span>+string2);</div><div class="line">byte[] byteList2 = string2.getBytes(<span class="string">"ISO-8859-1"</span>);</div><div class="line">String string3 = new String(byteList2,<span class="string">"utf-8"</span>);</div><div class="line">System.out.println(<span class="string">"字符恢复正常："</span>+string3);</div></pre></td></tr></table></figure></p>
-<p>运行后在console中如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">初始化unicode字符串:编码</div><div class="line">转成ISO-8859-1乱码:ç¼ç</div><div class="line">字符恢复正常：编码</div></pre></td></tr></table></figure></p>
-<p>先看一下字符：unicode -&gt; encode by utf-8 -&gt; decode by ISO-8859-1（乱码） -&gt; encode by ISO-8859-1 -&gt; decode by utf-8（正常）</p>
-<h2 id="场景二：GBK与UTF-8"><a href="#场景二：GBK与UTF-8" class="headerlink" title="场景二：GBK与UTF-8"></a>场景二：GBK与UTF-8</h2><p>老套路直接上代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">String string1 = <span class="string">"编码"</span>;</div><div class="line">System.out.println(<span class="string">"初始化unicode字符串:"</span>+string1);</div><div class="line">byte[] byteList1 = string1.getBytes(<span class="string">"utf-8"</span>);</div><div class="line">String string2 = new String(byteList1,<span class="string">"gbk"</span>);</div><div class="line">System.out.println(<span class="string">"转成gbk乱码:"</span>+string2);</div><div class="line">byte[] byteList2 = string2.getBytes(<span class="string">"gbk"</span>);</div><div class="line">String string3 = new String(byteList2,<span class="string">"utf-8"</span>);</div><div class="line">System.out.println(<span class="string">"字符恢复正常："</span>+string3);</div></pre></td></tr></table></figure></p>
-<p>在console如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">初始化unicode字符串:编码</div><div class="line">转成gbk乱码:缂栫爜</div><div class="line">字符恢复正常：编码</div></pre></td></tr></table></figure></p>
-<p>先看一下字符：unicode -&gt; encode by utf-8 -&gt; decode by gbk（乱码） -&gt; encode by gbk -&gt; decode by utf-8（正常）</p>
-<p>emm,看起来似乎没什么大的问题，其实不就是不管中间编码，其实到最后转回来就ok了嘛。<br>但是，小编居然看到一篇blog说这其实是个误区，那就来证实一下啦。</p>
-<h2 id="证实：修改原字符串"><a href="#证实：修改原字符串" class="headerlink" title="证实：修改原字符串"></a>证实：修改原字符串</h2><p>将上面的unicode字符串修改成：编码咯<br>ISO-8859-1：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">字符恢复正常：编码咯</div></pre></td></tr></table></figure></p>
-<p>gbk:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">字符恢复正常：编码�?</div></pre></td></tr></table></figure></p>
-<h2 id="来个结论"><a href="#来个结论" class="headerlink" title="来个结论"></a>来个结论</h2><p>经过小编的大量测试，发现ISO-8859-1作为中间编码是安全的，而gbk作为中间编码是不安全的（偶数字符长安全，奇数不安全）</p>
-<h3 id="why-为什么会出现这种神奇的现象？"><a href="#why-为什么会出现这种神奇的现象？" class="headerlink" title="why 为什么会出现这种神奇的现象？"></a>why 为什么会出现这种神奇的现象？</h3><p>想知道答案当然是看中间码的具体字节流啦</p>
-<p>还是一样，简单直接上代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">StringBuffer sb = new StringBuffer();</div><div class="line"><span class="keyword">for</span> (byte b : byteArray) &#123;</div><div class="line">sb.append(Integer.toHexString(b &amp; 0xFF));</div><div class="line">   sb.append(<span class="string">" "</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="Java-8新特性（一）"><a href="#Java-8新特性（一）" class="headerlink" title="Java 8新特性（一）"></a>Java 8新特性（一）</h1><p>J8在2014年就发布了，J9如今也出了，更新的速度赶上坐飞机了，知乎上面有人调侃，还在研究J5、6的源码，甚至有大神调侃，用J8重构之前的项目，会出现摸不着头脑的bug，把JDK换成7居然不报错了。小编不管，就是要学习J8新特性，毕竟J8某些特性算得上Java里程碑式的了。</p>
+<h2 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h2><p>J8通过Lambda表达式对函数式编程，函数式编程的最大特点就是能够将一个函数或者一段代码作为另外一个函数的参数。Lambda表达式可以说是J8最大的卖点了。拿来说说他的Syntax</p>
+<ul>
+<li>A comma-separated list of formal parameters enclosed in parentheses</li>
+<li>The arrow token, -&gt;</li>
+<li>A body, which consists of a single expression or a statement block.</li>
+</ul>
+<p>是不是觉得官方文档有点晦涩，其实语法就概括如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(parameter，parameter) -&gt; &#123;expression body&#125;</div></pre></td></tr></table></figure></p>
+<p>在J8之前，匿名内部类，监听器和事件处理器的使用都显得很冗长，可读性很差，或许说的有点虚，举一个java fx的按钮监听的例子（小编的java fx菜得一笔qwq）<br>匿名内部类：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">button.addActionListener(new <span class="function"><span class="title">ActionListener</span></span>() &#123;</div><div class="line">@Override</div><div class="line">public void actionPerformed(ActionEvent e) &#123;</div><div class="line">System.out.print(<span class="string">"Helllo Lambda in actionPerformed"</span>);</div><div class="line">&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>使用 Lambda 表达式后：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">button.addActionListener(</div><div class="line">(ActionEvent e)-&gt; </div><div class="line">System.out.print(<span class="string">"Helllo Lambda in actionPerformed"</span>)</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<p>是不是觉得Lambda表达式相较于匿名内部类清爽很多，可读性更强了</p>
+<p>废话不多说直接上一个使用多个形式参数的lambda表达式的示例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">public class Calculator &#123;</div><div class="line">      </div><div class="line">    interface IntegerMath &#123;</div><div class="line">        int operation(int a, int b);   </div><div class="line">    &#125;</div><div class="line">  </div><div class="line">    public int operateBinary(int a, int b, IntegerMath op) &#123;</div><div class="line">        <span class="built_in">return</span> op.operation(a, b);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    public static void main(String... args) &#123;</div><div class="line">    </div><div class="line">        Calculator myApp = new Calculator();</div><div class="line">        IntegerMath addition = (a, b) -&gt; a + b;</div><div class="line">        IntegerMath subtraction = (a, b) -&gt; a - b;</div><div class="line">        IntegerMath multiplication = (int a,int b) -&gt; a * b;</div><div class="line">        IntegerMath division = (a,b) -&gt; a / b;</div><div class="line">        </div><div class="line">        System.out.println(<span class="string">"40 + 2 = "</span> +</div><div class="line">            myApp.operateBinary(40, 2, addition));</div><div class="line">        System.out.println(<span class="string">"20 - 10 = "</span> +</div><div class="line">            myApp.operateBinary(20, 10, subtraction));</div><div class="line">        System.out.println(<span class="string">"20 * 10 = "</span> +</div><div class="line">                multiplication.operation(20, 10));</div><div class="line">        System.out.println(<span class="string">"20 / 10 = "</span> +</div><div class="line">        		division.operation(20, 10));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行效果如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">40 + 2 = 42</div><div class="line">20 - 10 = 10</div><div class="line">20 * 10 = 200</div><div class="line">20 / 10 = 2</div></pre></td></tr></table></figure></p>
+<h2 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h2><p>在J8中，方法也是对象能够被引用，方法引用的目的就是为了支持Lambda的缩写，让代码更加简洁可读。</p>
+<h3 id="方法引用分类"><a href="#方法引用分类" class="headerlink" title="方法引用分类"></a>方法引用分类</h3><table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reference to a static method</td>
+<td>ContainingClass::staticMethodName</td>
+</tr>
+<tr>
+<td>Reference to an instance method of a particular object</td>
+<td>containingObject::instanceMethodName</td>
+</tr>
+<tr>
+<td>Reference to an instance method of an arbitrary object of a particular type</td>
+<td>ContainingType::methodName</td>
+</tr>
+<tr>
+<td>Reference to a constructor</td>
+<td>ClassName::new</td>
+</tr>
+</tbody>
+</table>
+<p>官方文档是不是看起来特别累，其实也就是下面4种：</p>
+<ul>
+<li>引用静态方法 </li>
+<li>引用特定对象的实例方法</li>
+<li>引用特定类型的任意对象的实例方法</li>
+<li>引用构造函数</li>
+</ul>
+<p>具体语法如何，还是一样直接上代码：</p>
+<ul>
+<li><p>Reference to a static method</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Person::compareByAge</div></pre></td></tr></table></figure>
+</li>
+<li><p>Reference to a constructor </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String::new 等价于 Lambda的() -&gt; new String()</div></pre></td></tr></table></figure>
+</li>
+<li><p>reference to an instance method of a particular object</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">class ComparisonProvider &#123;</div><div class="line">    public int compareByName(Person a, Person b) &#123;</div><div class="line">        <span class="built_in">return</span> a.getName().compareTo(b.getName());</div><div class="line">    &#125;</div><div class="line">        </div><div class="line">    public int compareByAge(Person a, Person b) &#123;</div><div class="line">        <span class="built_in">return</span> a.getBirthday().compareTo(b.getBirthday());</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">ComparisonProvider myComparisonProvider = new ComparisonProvider();</div><div class="line">Arrays.sort(rosterAsArray, myComparisonProvider::compareByName);</div></pre></td></tr></table></figure>
+</li>
+<li><p>reference to an instance method of an arbitrary object of a particular type</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String[] stringArray = &#123; <span class="string">"Barbara"</span>, <span class="string">"James"</span>, <span class="string">"Mary"</span>, <span class="string">"John"</span>,</div><div class="line">    <span class="string">"Patricia"</span>, <span class="string">"Robert"</span>, <span class="string">"Michael"</span>, <span class="string">"Linda"</span> &#125;;</div><div class="line">Arrays.sort(stringArray, String::compareToIgnoreCase);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>官方文档分别用几个小栗子来说明方法引用，小编又在其他blog中看到了一些比较完整的demo：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div></pre></td><td class="code"><pre><div class="line">public class MethodReference &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        // 方法引用::引用构造函数</div><div class="line">        PersonFactory factory = new PersonFactory(Person::new);</div><div class="line">    </div><div class="line">        List&lt;Person&gt; personList = new ArrayList&lt;Person&gt;();</div><div class="line"></div><div class="line">        Person p1 = factory.getPerson();</div><div class="line">        p1.setName(<span class="string">"Kobe"</span>);</div><div class="line">        personList.add(p1);</div><div class="line">        Person p2 = factory.getPerson();</div><div class="line">        p2.setName(<span class="string">"James"</span>);</div><div class="line">        personList.add(p2);</div><div class="line">        Person p3 = factory.getPerson();</div><div class="line">        p3.setName(<span class="string">"Paul"</span>);</div><div class="line">        personList.add(p3);</div><div class="line"></div><div class="line">        Person[] persons1 = personList.toArray(new Person[personList.size()]);</div><div class="line">        System.out.print(<span class="string">"排序前: "</span>);</div><div class="line">        printArray(persons1);</div><div class="line"></div><div class="line">        // 方法引用::引用静态方法</div><div class="line">        Arrays.sort(persons1, MethodReference::myCompare);</div><div class="line">        //Arrays.sort(persons1, (m,n) -&gt; MethodReference.myCompare(m, n));</div><div class="line">        System.out.print(<span class="string">"排序后: "</span>);</div><div class="line">        printArray(persons1);</div><div class="line">        System.out.println();</div><div class="line"></div><div class="line">        Person[] persons2 = personList.toArray(new Person[personList.size()]);</div><div class="line">        System.out.print(<span class="string">"排序前: "</span>);</div><div class="line">        printArray(persons2);</div><div class="line"></div><div class="line">        // 方法引用::用特定对象的实例方法</div><div class="line">        Arrays.sort(persons2, p1::compare);</div><div class="line">        System.out.print(<span class="string">"排序后: "</span>);</div><div class="line">        printArray(persons2);</div><div class="line">        System.out.println();</div><div class="line"></div><div class="line">        Person[] persons3 = personList.toArray(new Person[personList.size()]);</div><div class="line">        System.out.print(<span class="string">"排序前: "</span>);</div><div class="line">        printArray(persons3);</div><div class="line"></div><div class="line">        // 方法引用::引用特定类型的任意对象的实例方法</div><div class="line">        Arrays.sort(persons3, Person::compareTo);</div><div class="line">        System.out.print(<span class="string">"排序后: "</span>);</div><div class="line">        printArray(persons3);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void printArray(Person[] persons) &#123;</div><div class="line">        <span class="keyword">for</span> (Person p : persons) &#123;</div><div class="line">            System.out.print(p.name + <span class="string">"  "</span>);</div><div class="line">        &#125;</div><div class="line">        System.out.println();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static int myCompare(Person p1, Person p2) &#123;</div><div class="line">        <span class="built_in">return</span> p1.getName().compareTo(p2.getName());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    static class Person &#123;</div><div class="line">        private String name;</div><div class="line"></div><div class="line">        public <span class="function"><span class="title">Person</span></span>() &#123;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public String <span class="function"><span class="title">getName</span></span>() &#123;</div><div class="line">            <span class="built_in">return</span> name;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public void setName(String name) &#123;</div><div class="line">            this.name = name;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public int compare(Person p1, Person p2) &#123;</div><div class="line">            <span class="built_in">return</span> p1.getName().compareTo(p2.getName());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public int compareTo(Person p) &#123;</div><div class="line">            <span class="built_in">return</span> this.getName().compareTo(p.getName());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    static class PersonFactory &#123;</div><div class="line">        private Supplier&lt;Person&gt; supplier;</div><div class="line"></div><div class="line">        public PersonFactory(Supplier&lt;Person&gt; supplier) &#123;</div><div class="line">            this.supplier = supplier;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public Person <span class="function"><span class="title">getPerson</span></span>() &#123;</div><div class="line">            <span class="built_in">return</span> supplier.get();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    public interface Supplier&lt;T&gt; &#123;</div><div class="line"></div><div class="line">        /**</div><div class="line">         * Gets a result.</div><div class="line">         *</div><div class="line">         * @<span class="built_in">return</span> a result</div><div class="line">         */</div><div class="line">        T get();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <blockquote>
-<p>注：ava.lang.Integer.toHexString()方法返回的字符串表示的无符号整数参数所表示的值以十六进制以表示。在64位计算机中数字以64位格式存储，若byte（8位）数字，高几位能有随机性，只有低8位才是有效数字，所以 &amp; 上0xFF</p>
+<p>Demo出处：<a href="http://blog.csdn.net/kimylrong/article/details/47255123" target="_blank" rel="external">java8 - 方法引用(method referrance)</a></p>
 </blockquote>
-<p>中间码为ISO-8859-1安全的没问题<br>然后看一下中间码为GBK的console：<br>字符串为偶数的时候：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">utf Byte：e7 bc 96 e7 a0 81</div><div class="line">gbk Byte：e7 bc 96 e7 a0 81</div></pre></td></tr></table></figure></p>
-<p>字符串为奇数的时候：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">utf Byte：e7 bc 96 e7 a0 81 e5 92 af</div><div class="line">gbk Byte：e7 bc 96 e7 a0 81 e5 92 3f</div></pre></td></tr></table></figure></p>
-<h3 id="看到这有木有恍然大悟呀"><a href="#看到这有木有恍然大悟呀" class="headerlink" title="看到这有木有恍然大悟呀"></a>看到这有木有恍然大悟呀</h3><p>blog开头就说了，utf-8一个汉字占3个byte，ISO-8859-1是单字节编码,gbk是双字节编码<br>所以ISO-8859-1都是这样的字节流：[e7] [bc] [96] [e7] [a0] [81] [e5] [92] [af]这个是安全的</p>
-<p>而当GBK时，字符串为偶数时候，gbk的字节流是：[e7 bc] [96 e7] [a0 81]</p>
-<p>当字符串是奇数时，gbk的字节流是：[e7 bc] [96 e7] [a0 81] [e5 92] af</p>
-<p>gbk的字节流多出了af无法组合，于是用一个半角Ascii字符的 “？” 代替（3f刚好就是Ascii的‘？’）</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>中间码不一定全是安全的，ISO-8859-1作为中间码是安全的，但是，utf-8或者gbk作为中间码其实都是不安全的。</p>
-<p>附上一句：使用什么编码，就用什么解码。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/" target="_blank" rel="external">The Java™ Tutorials</a></p>
+<p>下周是下半年第一次满课，J8（二）更新不知道啥时候罗，晚安qwq</p>
 
       
     </div>
@@ -535,7 +578,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://williamywh.github.io/2017/10/20/coding/" title="浅谈Java乱码">http://williamywh.github.io/2017/10/20/coding/</a>
+    <a href="http://williamywh.github.io/2017/10/29/J8/" title="Java 8新特性（一）">http://williamywh.github.io/2017/10/29/J8/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -550,7 +593,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/font-size-6-Java乱码-font/" rel="tag"><i class="fa fa-tag"></i> <font size=6>Java乱码</font></a>
+            <a href="/tags/font-size-6-Java-8-font/" rel="tag"><i class="fa fa-tag"></i> <font size=6>Java 8</font></a>
           
         </div>
       
@@ -563,8 +606,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/16/DSC1/" rel="next" title="数据库系统概念(一)">
-                <i class="fa fa-chevron-left"></i> 数据库系统概念(一)
+              <a href="/2017/10/21/coding2/" rel="next" title="实际开发过程中乱码解决">
+                <i class="fa fa-chevron-left"></i> 实际开发过程中乱码解决
               </a>
             
           </div>
@@ -572,10 +615,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/21/coding2/" rel="prev" title="实际开发过程中乱码解决">
-                实际开发过程中乱码解决 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -792,7 +831,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#编码小故事"><span class="nav-number">1.</span> <span class="nav-text">编码小故事</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#场景一：ISO-8859-1与UTF-8"><span class="nav-number">2.</span> <span class="nav-text">场景一：ISO-8859-1与UTF-8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#场景二：GBK与UTF-8"><span class="nav-number">3.</span> <span class="nav-text">场景二：GBK与UTF-8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证实：修改原字符串"><span class="nav-number">4.</span> <span class="nav-text">证实：修改原字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#来个结论"><span class="nav-number">5.</span> <span class="nav-text">来个结论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#why-为什么会出现这种神奇的现象？"><span class="nav-number">5.1.</span> <span class="nav-text">why 为什么会出现这种神奇的现象？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#看到这有木有恍然大悟呀"><span class="nav-number">5.2.</span> <span class="nav-text">看到这有木有恍然大悟呀</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">6.</span> <span class="nav-text">小结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-8新特性（一）"><span class="nav-number">1.</span> <span class="nav-text">Java 8新特性（一）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lambda表达式"><span class="nav-number">1.1.</span> <span class="nav-text">Lambda表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法引用"><span class="nav-number">1.2.</span> <span class="nav-text">方法引用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法引用分类"><span class="nav-number">1.2.1.</span> <span class="nav-text">方法引用分类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
