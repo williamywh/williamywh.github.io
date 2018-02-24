@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://williamywh.github.io/"/>
-  <updated>2018-02-24T09:56:38.864Z</updated>
+  <updated>2018-02-24T10:00:10.530Z</updated>
   <id>http://williamywh.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://williamywh.github.io/2018/02/24/crawl-1/"/>
     <id>http://williamywh.github.io/2018/02/24/crawl-1/</id>
     <published>2018-02-24T09:41:19.000Z</published>
-    <updated>2018-02-24T09:56:38.864Z</updated>
+    <updated>2018-02-24T10:00:10.530Z</updated>
     
     <content type="html"><![CDATA[<p><img src="https://i.loli.net/2018/02/24/5a9113702032c.png" alt=""></p><h1 id="Python爬虫导言"><a href="#Python爬虫导言" class="headerlink" title="Python爬虫导言"></a>Python爬虫导言</h1><p>爬虫一般是使用者通过某种途径爬取目标站点所需要的数据。这种途径包括站点本身的sitemap、网站提供的API、当然也包括自己编写的小蜘蛛。</p><h2 id="爬取前有必要了解的一些东西"><a href="#爬取前有必要了解的一些东西" class="headerlink" title="爬取前有必要了解的一些东西"></a>爬取前有必要了解的一些东西</h2><h3 id="robots-txt"><a href="#robots-txt" class="headerlink" title="robots.txt"></a>robots.txt</h3><p>这是一个文件，里面给出了爬虫爬取该网站时应该遵守的一些规定，来约束爬虫的行为，当然在后面自然有办法违背robots.txt文件，但同时也要承担爬虫被封甚至ip封禁的风险。<br><a href="www.robotstxt.org">robots.txt参考文件</a></p><h3 id="sitemap"><a href="#sitemap" class="headerlink" title="sitemap"></a>sitemap</h3><p>sitemap文件里面包含网站最新的内容，通过这个东西可以爬取我们需要的内容而不需要访问每一个网页。但是它也存在内容缺少不完整等问题（例如本博客的sitemap就傻了（捂脸））<br><a href="www.sitemaps.org/protocol.html">取网站地图标准的定义</a></p><h3 id="builtwith模块"><a href="#builtwith模块" class="headerlink" title="builtwith模块"></a>builtwith模块</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">builtwith.parse(<span class="string">'url'</span>)</div></pre></td></tr></table></figure><p>通过这个模板可以分析这个网站构建所使用的部分类型，从而可以确定爬取的大致方向</p><h3 id="WHOIS"><a href="#WHOIS" class="headerlink" title="WHOIS"></a>WHOIS</h3><p>通过whois协议可以查找出域名注册者是谁。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">whois.whois(<span class="string">'域名'</span>)</div></pre></td></tr></table></figure></p><h3 id="搜索引擎"><a href="#搜索引擎" class="headerlink" title="搜索引擎"></a>搜索引擎</h3><p>谷歌百度估计都不陌生，讲道理搜索引擎我们真的用对方向了？谈谈搜索黑魔法<br>比如说，爬取前你想估算目标站点究竟有多大，来决定究竟使用多线程任务还是单线程串行爬、使用框架还是原生态等等。<br>善于利用搜索引擎的就会<strong><em>site:url</em></strong>  然后谷歌百度就会在左上角About xxx results（xxx second），并且这个量一般只会多不会少。</p><p><strong><em><a href="www.google.com/advanced_search">谷歌其他高级搜索参数用法</a></em></strong></p><p><strong><em><a href="www.baidu.com/gaoji/advanced.html">百度高级搜索参数可视化搜索</a></em></strong></p><p>搜索常用的关键词：</p><ul><li><code>example</code> #用例</li><li><code>tutorial</code> #教程</li><li><code>doc</code> #文档</li><li><code>awesome</code> #集合</li><li><code>github</code> #最大开源平台</li><li><code>stackoverflow</code> #码农版知乎</li></ul><p>比如说，你想看看python有什么很棒的开源项目，可以选择这样搜索，python awesome github，当然也可以直接到github上面搜。</p>]]></content>
     
@@ -39,8 +39,6 @@
     
     
       <category term="&lt;font size=6&gt;爬虫&lt;/font&gt;" scheme="http://williamywh.github.io/tags/font-size-6-%E7%88%AC%E8%99%AB-font/"/>
-    
-      <category term="&lt;font size=6&gt;Python&lt;/font&gt;" scheme="http://williamywh.github.io/tags/font-size-6-Python-font/"/>
     
   </entry>
   
