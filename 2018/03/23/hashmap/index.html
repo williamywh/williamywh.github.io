@@ -90,7 +90,7 @@
 <meta property="og:description" content="Java源码剖析HashMap 在Eclipse这个IDE中，一般阅读源码的方式就是鼠标点击对象的同时，按住ctrl键就可以阅读到你想要的源码了，如果按照以上方式进行时，遇到Attach Source的缘故无法看到源码，不妨试一下下面的方式。   菜单栏Window -&amp;gt; Preferences -&amp;gt; 左边选项的Java -&amp;gt; Installed JREs 右边会出现l列表窗体，">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2018/03/23/5ab4adca6ce3a.png">
-<meta property="og:updated_time" content="2018-03-23T09:02:43.145Z">
+<meta property="og:updated_time" content="2018-03-23T10:25:29.501Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java源码剖析HashMap">
 <meta name="twitter:description" content="Java源码剖析HashMap 在Eclipse这个IDE中，一般阅读源码的方式就是鼠标点击对象的同时，按住ctrl键就可以阅读到你想要的源码了，如果按照以上方式进行时，遇到Attach Source的缘故无法看到源码，不妨试一下下面的方式。   菜单栏Window -&amp;gt; Preferences -&amp;gt; 左边选项的Java -&amp;gt; Installed JREs 右边会出现l列表窗体，">
@@ -459,9 +459,67 @@
 </ul>
 </blockquote>
 <hr>
-<h2 id="HashMap初识"><a href="#HashMap初识" class="headerlink" title="HashMap初识"></a>HashMap初识</h2><p>在官网API中是这样描述hashMap：<br>| Class        | Description   |<br>| ——–   | —–:  |<br>| HashMap<k,v> | 基于哈希表的Map接口实现。 |</k,v></p>
-<p>与之相关的接口：<br>| Interfaces        | Description   |<br>| ——–   | —–:  |<br>| Map<k,v> | 将键映射到值的对象。 |<br>| Map.Entry<k,v> | 一个映射条目（键值对）。 |</k,v></k,v></p>
-<p>源码中出现比较重要的参数：<br>| 变量        | 术语   |  说明  |<br>| ——–   | —–:  | :—-:  |<br>| size     | 大小 |   The number of key-value mappings contained in this map.（HashMap的存储大小）     |<br>| loadFactor        |   负载因子   |   The load factor for the hash table.（HashMap大小负载因子，默认为0.75f）   |<br>| threshold        |    临界值    |  The next size value at which to resize (capacity * load factor).（HashMap大小达到临界值，需要重新分配大小。）  |</p>
+<h2 id="HashMap初识"><a href="#HashMap初识" class="headerlink" title="HashMap初识"></a>HashMap初识</h2><p>在官网API中是这样描述hashMap：</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HashMap<k,v></k,v></td>
+<td>基于哈希表的Map接口实现。</td>
+</tr>
+</tbody>
+</table>
+<p>与之相关的接口：</p>
+<table>
+<thead>
+<tr>
+<th>Interfaces</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Map<k,v></k,v></td>
+<td>将键映射到值的对象。</td>
+</tr>
+<tr>
+<td>Map.Entry<k,v></k,v></td>
+<td>一个映射条目（键值对）。</td>
+</tr>
+</tbody>
+</table>
+<p>源码中出现比较重要的参数：</p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th style="text-align:right">术语</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>size</td>
+<td style="text-align:right">大小</td>
+<td style="text-align:center">The number of key-value mappings contained in this map.（HashMap的存储大小）</td>
+</tr>
+<tr>
+<td>loadFactor</td>
+<td style="text-align:right">负载因子</td>
+<td style="text-align:center">The load factor for the hash table.（HashMap大小负载因子，默认为0.75f）</td>
+</tr>
+<tr>
+<td>threshold</td>
+<td style="text-align:right">临界值</td>
+<td style="text-align:center">The next size value at which to resize (capacity * load factor).（HashMap大小达到临界值，需要重新分配大小。）</td>
+</tr>
+</tbody>
+</table>
 <p>在源码的开头就直接看见HashMap<k，v>类的定义：基于哈希表的Map接口实现。 该实现提供了所有可选的映射操作，并允许使用空值和空键。 （HashMap类大致等同于Hashtable ，除了它是不同步的并且允许为空值。）这个类不能保证地图的顺序; 特别是，它不能保证订单会随着时间的推移保持不变。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public class HashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt; implements Map&lt;K,V&gt;, Cloneable, Serializable</div></pre></td></tr></table></figure></k，v></p>
 <p>大概就知道它所有实现的接口：可串行化 ，可复制 ， 映射 <k，v>，可能类会实现接口的方法或者override父类的方法。</k，v></p>
 <h3 id="HashMap的构造函数"><a href="#HashMap的构造函数" class="headerlink" title="HashMap的构造函数"></a>HashMap的构造函数</h3><p>粗略地数了一下，大概有4个构造函数：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">public HashMap(int initialCapacity, <span class="built_in">float</span> loadFactor) &#123;</div><div class="line">        <span class="keyword">if</span> (initialCapacity &lt; 0)</div><div class="line">            throw new IllegalArgumentException(<span class="string">"Illegal initial capacity: "</span> +</div><div class="line">                                               initialCapacity);</div><div class="line">        <span class="keyword">if</span> (initialCapacity &gt; MAXIMUM_CAPACITY)</div><div class="line">            initialCapacity = MAXIMUM_CAPACITY; // MAXIMUM_CAPACITY=1&lt;&lt;30 </div><div class="line">        <span class="keyword">if</span> (loadFactor &lt;= 0 || Float.isNaN(loadFactor))</div><div class="line">            throw new IllegalArgumentException(<span class="string">"Illegal load factor: "</span> +</div><div class="line">                                               loadFactor);</div><div class="line">        this.loadFactor = loadFactor;</div><div class="line">        this.threshold = tableSizeFor(initialCapacity);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public HashMap(int initialCapacity) &#123;</div><div class="line">        this(initialCapacity, DEFAULT_LOAD_FACTOR);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    public <span class="function"><span class="title">HashMap</span></span>() &#123;</div><div class="line">        this.loadFactor = DEFAULT_LOAD_FACTOR; // all other fields defaulted</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    public HashMap(Map&lt;? extends K, ? extends V&gt; m) &#123;</div><div class="line">        this.loadFactor = DEFAULT_LOAD_FACTOR;</div><div class="line">        putMapEntries(m, <span class="literal">false</span>);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
