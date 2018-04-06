@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="<font size=6>Java Thread</font>," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Wuliviki's world" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Java多线程(二) 线程池前面说过，任务即是对象，任务类需要实现java.lang.Runnable接口，并且任务类需要在一个线程上面运行。那么，当任务类多了，由必须为每一个线程创建一个线程，明显，这可能会限制流量并且造成性能上的降低。线程池就是这样子应运而生的。Java提供Executor接口来执行线程池中的任务，提供ExecutorService接口来管理和控制任务，其实ExecutorSe">
+<meta name="keywords" content="&lt;font size=6&gt;Java Thread&lt;&#x2F;font&gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java多线程(二)">
+<meta property="og:url" content="http://williamywh.github.io/2018/04/06/thread2/index.html">
+<meta property="og:site_name" content="Wuliviki&#39;s world">
+<meta property="og:description" content="Java多线程(二) 线程池前面说过，任务即是对象，任务类需要实现java.lang.Runnable接口，并且任务类需要在一个线程上面运行。那么，当任务类多了，由必须为每一个线程创建一个线程，明显，这可能会限制流量并且造成性能上的降低。线程池就是这样子应运而生的。Java提供Executor接口来执行线程池中的任务，提供ExecutorService接口来管理和控制任务，其实ExecutorSe">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-06T02:57:22.907Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java多线程(二)">
+<meta name="twitter:description" content="Java多线程(二) 线程池前面说过，任务即是对象，任务类需要实现java.lang.Runnable接口，并且任务类需要在一个线程上面运行。那么，当任务类多了，由必须为每一个线程创建一个线程，明显，这可能会限制流量并且造成性能上的降低。线程池就是这样子应运而生的。Java提供Executor接口来执行线程池中的任务，提供ExecutorService接口来管理和控制任务，其实ExecutorSe">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://williamywh.github.io/2018/04/06/thread2/"/>
+
+
+
+
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+  <title>Java多线程(二) | Wuliviki's world</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wuliviki's world</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">chat with me</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://williamywh.github.io/2018/04/06/thread2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="尹文辉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wuliviki's world">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java多线程(二)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-06T10:55:33+08:00">
+                2018-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Java多线程-二"><a href="#Java多线程-二" class="headerlink" title="Java多线程(二)"></a>Java多线程(二)</h1><hr>
+<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>前面说过，任务即是对象，任务类需要实现java.lang.Runnable接口，并且任务类需要在一个线程上面运行。那么，当任务类多了，由必须为每一个线程创建一个线程，明显，这可能会限制流量并且造成性能上的降低。<br>线程池就是这样子应运而生的。Java提供Executor接口来执行线程池中的任务，提供ExecutorService接口来管理和控制任务，其实ExecutorService是Executor的子接口，这2个接口均在<strong>java.util.concurrent</strong>这个包下。</p>
+<table>
+<thead>
+<tr>
+<th>Executor接口常用方法</th>
+<th style="text-align:right">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>execute(Runnable object)：void</td>
+<td style="text-align:right">执行任务类的run任务</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ExecutorService接口常用方法</th>
+<th style="text-align:right">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>shutdown():void</td>
+<td style="text-align:right">关闭执行器，但允许完成执行器中的任务。一旦关闭，它就不能接受新的任务</td>
+</tr>
+<tr>
+<td>shutdownNow():List&lt; Runnable &gt;</td>
+<td style="text-align:right">即使线程池中还有未完成的线程，还是会立即关闭执行器。返回未完成任务的清单</td>
+</tr>
+<tr>
+<td>isShutdown():boolean</td>
+<td style="text-align:right">如果执行器已经被关闭则返回True</td>
+</tr>
+<tr>
+<td>isTerminated():boolean</td>
+<td style="text-align:right">如果线程池中所有的任务都被终止，则返回True</td>
+</tr>
+</tbody>
+</table>
+<p>Executor和ExcetorServer都是接口，要创建一个Excutor对象，可以使用Excetors类中的静态方法。</p>
+<table>
+<thead>
+<tr>
+<th>Executors常用方法</th>
+<th style="text-align:right">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>newFixedThreadPool(numberOfThreads:int):ExecutorService</td>
+<td style="text-align:right">创建一个线程池，该线程池可并发执行的线程数固定不变。在线程的当前任务结束后，他可以被重用来执行另一个任务。</td>
+</tr>
+<tr>
+<td>newCachedThreadPool():ExecutorService</td>
+<td style="text-align:right">创建一个线程池，它可按需创建新的线程，但当前面的线程空闲时候可以重用他们</td>
+</tr>
+</tbody>
+</table>
+<p>Demo（将前面那一章的Demo1中的3-13行替换成）:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ExecutorService executor = Executors.newFixedThreadPool(3);</div><div class="line">		executor.execute(new PrintChar(<span class="string">'a'</span>,100));</div><div class="line">		executor.execute(new PrintChar(<span class="string">'b'</span>,100));</div><div class="line">		executor.execute(new PrintNum(100));</div><div class="line">		executor.shutdown();</div></pre></td></tr></table></figure></p>
+<p>第一行创建了一个最大线程数为3的线程执行器。如果将newFixThreadPool(3)改成1，那么a、b和数字就会按顺序执行，因为线程池中只有一个执行器。又或者换成Executors.newCachedThreadPool()那么就会为等待任务新建一个线程，依然是并发执行。</p>
+<h2 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h2><p>如果有多个线程同时访问临界区（共享资源），那么，共享资源可能就会被破坏。<br>Demo10：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">package test.multithreading;</div><div class="line"></div><div class="line">import java.util.concurrent.*;</div><div class="line">public class Test &#123;</div><div class="line">	private static Account account = new Account();</div><div class="line">	</div><div class="line">	public static void main(String[] args)&#123;</div><div class="line">		ExecutorService executor = Executors.newCachedThreadPool();</div><div class="line">		<span class="keyword">for</span>(int i=0; i&lt;100; i++)&#123;</div><div class="line">			executor.execute(new AddOne());</div><div class="line">		&#125;</div><div class="line">		executor.shutdown();</div><div class="line">		<span class="keyword">while</span>(!executor.isTerminated())&#123;</div><div class="line">		&#125;</div><div class="line">		System.out.println(<span class="string">"balance="</span>+account.getBalance());</div><div class="line">	&#125;</div><div class="line">	private static class AddOne implements Runnable&#123;</div><div class="line">		@Override</div><div class="line">		public void <span class="function"><span class="title">run</span></span>() &#123;</div><div class="line">			account.deposite(1);			</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	private static class Account&#123;</div><div class="line">		private int balance = 0;</div><div class="line">		public int <span class="function"><span class="title">getBalance</span></span>()&#123;</div><div class="line">			<span class="built_in">return</span> balance;</div><div class="line">		&#125;</div><div class="line">		public void deposite(int amount)&#123;</div><div class="line">			int newBalance = balance + amount;</div><div class="line">			try&#123;</div><div class="line">				Thread.sleep(5);</div><div class="line">			&#125;catch(InterruptedException e)&#123;</div><div class="line">				</div><div class="line">			&#125;</div><div class="line">			balance = newBalance;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Demo中account相当于共享资源。程序的原意是在共享资源account上将balance属性相加100次，那么account的balance的值应当为100.但是，因为account属于共享资源，多个线程同时访问并且修改，可以在1秒钟内，同时执行deposite方法，在前面的线程没有执行到35行的时候，其他线程就执行完了29行，则newBalance的值其实是不变的。30-34行让当前线程的值睡眠是为了放大数据破坏的程度，这个sleep时间越小，balance的值理应较大。<br>这是多线程程序一个普遍的问题，称为竞争状态，因此，Account类是线程不安全的，相对来说，没有竞争状态的称为线程安全。</p>
+<h3 id="synchronized关键字"><a href="#synchronized关键字" class="headerlink" title="synchronized关键字"></a>synchronized关键字</h3><p>解决竞争状态的方法可以使用关键字synchronized来实现同步机制，就是一次只有一个线程能访问到这个方法。<br>那么将上面的Demo10的中28行添加关键字synchronize则变成线程安全的：<br><strong>public synchronize void deposite(double amount)</strong></p>
+<h4 id="同步语句"><a href="#同步语句" class="headerlink" title="同步语句"></a>同步语句</h4><p>调用一个对象的实例方法要求给该对象加锁；调用一个类的静态方法要求对该类加锁。<br>这句话应该怎么理解比较好呢？直接上Demo：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">package test.multithreading;</div><div class="line"></div><div class="line">import java.util.*;</div><div class="line">import java.util.concurrent.*;</div><div class="line"></div><div class="line">public class Demo &#123;</div><div class="line">	private static TestClass test1 = new TestClass();</div><div class="line">	private static TestClass test2 = new TestClass();	</div><div class="line">	public static void main(String[] args)&#123;		</div><div class="line">		ExecutorService executor = Executors.newFixedThreadPool(2);</div><div class="line">		executor.execute(new Temporary1());</div><div class="line">		executor.execute(new Temporary2());</div><div class="line">		executor.shutdown();</div><div class="line">	&#125;</div><div class="line">	private static class Temporary1 implements Runnable&#123;</div><div class="line">		@Override</div><div class="line">		public void <span class="function"><span class="title">run</span></span>() &#123;</div><div class="line">			test1.SyncA();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	private static class Temporary2 implements Runnable&#123;</div><div class="line">		@Override</div><div class="line">		public void <span class="function"><span class="title">run</span></span>() &#123;</div><div class="line">			test1.SyncB();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class TestClass&#123;</div><div class="line">	public synchronized void <span class="function"><span class="title">SyncA</span></span>()&#123;</div><div class="line">		System.out.println(<span class="string">"a"</span>);</div><div class="line">		try &#123;</div><div class="line">			Thread.sleep(5000);</div><div class="line">		&#125; catch (InterruptedException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">		&#125;  </div><div class="line">	  </div><div class="line">    public synchronized void <span class="function"><span class="title">SyncB</span></span>()&#123;</div><div class="line">    	System.out.println(<span class="string">"b"</span>);</div><div class="line">    	try &#123;</div><div class="line">			Thread.sleep(5000);</div><div class="line">		&#125; catch (InterruptedException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">    &#125;  </div><div class="line"></div><div class="line">    public static synchronized void <span class="function"><span class="title">static_SyncC</span></span>()&#123;</div><div class="line">    	System.out.println(<span class="string">"c"</span>);</div><div class="line">    	try &#123;</div><div class="line">			Thread.sleep(5000);</div><div class="line">		&#125; catch (InterruptedException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">    &#125;  </div><div class="line"></div><div class="line">    public static synchronized void <span class="function"><span class="title">static_SyncD</span></span>()&#123;</div><div class="line">    	System.out.println(<span class="string">"d"</span>);</div><div class="line">    	try &#123;</div><div class="line">			Thread.sleep(5000);</div><div class="line">		&#125; catch (InterruptedException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>先观察，程序有2个除主线程外的线程，TestClass有4个方法，其中底部2个是类的静态方法，上面2个是实例方法。都加上了锁（同步机制）。<br>1、同时运行同一个TestClass实例的2个静态方法，可以看出先输出a然后等待5s后输出b，在等待5s，程序结束。这说明，同一个实例的非静态synchronize域不能同时被访问。<br>2、24行替换成：test2.SyncA()； 同时输出a，然后等待5s后结束。这说明，不同实例的非静态synchronize域可以被同时访问。<br>3、18行替换成：test1.static_SyncC();  24行替换成test2.static_SyncD();<br>先输出c后睡眠5s后输出d，再睡眠5s函数结束。这说明，即使是不同的实例同时访问静态synchronize域，还是不能同时访问，意味着static synchronize起作用的是类而不是方法，static方法加锁意味着类加了锁。<br>4、18行替换成test1.SyncA(); 24行替换成TestClass.static_SyncD();<br>程序同时输出a和d，睡眠5s后程序结束。这说明，实例方法的锁和类锁不同的原因，因此可以同时被访问。<br>5、18行替换成test1.SyncA(); 24行替换成test1.static_SyncD();程序同时输出a和d，其实这种和第四点是一样的。因为不是同一个锁的原因。</p>
+<p>然后大概就可以总结出，实例方法加锁和静态方法加锁属于2个不同的所类型，可以被同时访问，实例方法的锁对同一个实例起作用，静态方法的锁对不同实例也起作用。</p>
+<p>任何同步的实例方法都可以转换成同步语句：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">public synchronized void <span class="function"><span class="title">Method</span></span>()&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>等价于<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public synchronized <span class="function"><span class="title">Method</span></span>()&#123;</div><div class="line">    synchronized(this)&#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>因此Demo10解决共享数据被破坏除了在实例方法加同步外还可以用同步语句：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">synchronized(account)&#123;</div><div class="line">    account.deposit(1);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="利用加锁同步"><a href="#利用加锁同步" class="headerlink" title="利用加锁同步"></a>利用加锁同步</h3><p>上面Demo10所说的ssynchronized其实是在执行方法之前都隐式地加上一个锁。<br>那Java也可以显示加锁，这样线程间协调性就会更加强、灵活。<br>一个锁是一个Lock接口(位于java.util.concurrent.locks.Lock包中)的实例，它定义了加锁和释放锁的方法。</p>
+<table>
+<thead>
+<tr>
+<th>《interface》Lock</th>
+<th style="text-align:right">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lock():void</td>
+<td style="text-align:right">加锁</td>
+</tr>
+<tr>
+<td>unlock():void</td>
+<td style="text-align:right">释放锁</td>
+</tr>
+<tr>
+<td>newCondition():Condition</td>
+<td style="text-align:right">返回绑定到Lock实例的新的Condition实例</td>
+</tr>
+</tbody>
+</table>
+<p>ReentrantLock（java.util.concurrent.locks.ReentrantLock）是为创建互相排斥的锁的Lock的具体实现</p>
+<table>
+<thead>
+<tr>
+<th>《interface》Lock</th>
+<th style="text-align:right">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ReentrantLock()</td>
+<td style="text-align:right">等价于ReentrantLock(false)</td>
+</tr>
+<tr>
+<td>ReentrantLock(fair：boolean)</td>
+<td style="text-align:right">创建具有给定公平策略的锁。当公平性为true是，等待时间最长的线程将获得锁；否则，没有特定的获得顺序</td>
+</tr>
+</tbody>
+</table>
+<p>Demo10使用隐式锁synchronize关键字实现数据的安全性，如今可以使用Lock显式锁实现<br>Demo11：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">package test.multithreading;</div><div class="line"></div><div class="line">import java.util.concurrent.*;</div><div class="line">public class Test &#123;</div><div class="line">	private static Account account = new Account();</div><div class="line">	</div><div class="line">	public static void main(String[] args)&#123;</div><div class="line">		ExecutorService executor = Executors.newCachedThreadPool();</div><div class="line">		<span class="keyword">for</span>(int i=0; i&lt;100; i++)&#123;</div><div class="line">			executor.execute(new AddOne());</div><div class="line">		&#125;</div><div class="line">		executor.shutdown();</div><div class="line">		<span class="keyword">while</span>(!executor.isTerminated())&#123;</div><div class="line">		&#125;</div><div class="line">		System.out.println(<span class="string">"balance="</span>+account.getBalance());</div><div class="line">	&#125;</div><div class="line">	private static class AddOne implements Runnable&#123;</div><div class="line">		@Override</div><div class="line">		public void <span class="function"><span class="title">run</span></span>() &#123;</div><div class="line">			account.deposite(1);			</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	private static class Account&#123;</div><div class="line">		private int balance = 0;</div><div class="line">		private static Lock lock = new ReentrantLock();</div><div class="line">		public int <span class="function"><span class="title">getBalance</span></span>()&#123;</div><div class="line">			<span class="built_in">return</span> balance;</div><div class="line">		&#125;</div><div class="line">		public void deposite(int amount)&#123;</div><div class="line">			lock.lock();</div><div class="line">			try&#123;</div><div class="line">				int newBalance = balance + amount;</div><div class="line">				Thread.sleep(5);</div><div class="line">				balance = newBalance;</div><div class="line">			&#125;catch(InterruptedException e)&#123;</div><div class="line">				</div><div class="line">			&#125;finally &#123;</div><div class="line">				lock.unlock();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>一般lock的释放放在finally块中，确保无论如何所都会释放。明显使用synchronized关键字或者同步语句比显示锁简单些，但是显示锁明显更加直观和灵活。</p>
+<h3 id="线程间协作"><a href="#线程间协作" class="headerlink" title="线程间协作"></a>线程间协作</h3><p>前面都在讲如何避免多个线程同时访问临界区时造成数据破坏，但是有时候线程之间也需要协作，需要线程通讯。线程可以指定在某些条件做什么，条件就是通过调用Lock对象的newCondition方法而创建的对象。（Condition位于java.util.concurrent.Condition包中）</p>
+<table>
+<thead>
+<tr>
+<th>《interface》Condition</th>
+<th style="text-align:right">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>await():void</td>
+<td style="text-align:right">当前线程等待知道发生某个条件,让线程等待并且释放条件上的锁</td>
+</tr>
+<tr>
+<td>signal():void</td>
+<td style="text-align:right">唤醒一个等待线程</td>
+</tr>
+<tr>
+<td>signalAll():Condition</td>
+<td style="text-align:right">唤醒所有线程</td>
+</tr>
+</tbody>
+</table>
+<p>直接上Demo：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">package test.multithreading;</div><div class="line"></div><div class="line">import java.util.concurrent.*;</div><div class="line">import java.util.concurrent.locks.*;</div><div class="line">public class Test &#123;</div><div class="line">	private static Account account = new Account();</div><div class="line">	public static void main(String[] args)&#123;</div><div class="line">		ExecutorService executor = Executors.newCachedThreadPool();</div><div class="line">		executor.execute(new DepositTask());</div><div class="line">		executor.execute(new WithdrawTask());</div><div class="line">		System.out.println(<span class="string">"Thread 1\t\tThread 2\t\tBalance"</span>);</div><div class="line">		executor.shutdown();</div><div class="line">	&#125;</div><div class="line">	public static class DepositTask implements Runnable&#123;</div><div class="line">		@Override</div><div class="line">		public void <span class="function"><span class="title">run</span></span>() &#123;</div><div class="line">			try&#123;</div><div class="line">				<span class="keyword">while</span>(<span class="literal">true</span>)&#123;</div><div class="line">					account.deposit((int)(Math.random() * 10) + 1);</div><div class="line">					Thread.sleep(1000);</div><div class="line">				&#125;</div><div class="line">			&#125;catch(InterruptedException ex)&#123;</div><div class="line">				ex.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	public static class WithdrawTask implements Runnable&#123;</div><div class="line">		@Override</div><div class="line">		public void <span class="function"><span class="title">run</span></span>() &#123;</div><div class="line">			<span class="keyword">while</span>(<span class="literal">true</span>)&#123;</div><div class="line">				account.withdraw((int)(Math.random() * 10) + 1);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	private static class Account&#123;</div><div class="line">		private static Lock lock = new ReentrantLock();</div><div class="line">		private static Condition newDeposit = lock.newCondition();</div><div class="line">		private int balance = 0;</div><div class="line">		public int <span class="function"><span class="title">getBalance</span></span>()&#123;</div><div class="line">			<span class="built_in">return</span> balance;</div><div class="line">		&#125;</div><div class="line">		public void withdraw(int amount)&#123;</div><div class="line">			lock.lock();</div><div class="line">			try&#123;</div><div class="line">				<span class="keyword">while</span>(balance &lt; amount)&#123;</div><div class="line">					System.out.println(<span class="string">"\t\t\tWait for a deposit"</span> + amount);</div><div class="line">					newDeposit.await();</div><div class="line">				&#125;</div><div class="line">				balance -=amount;</div><div class="line">				System.out.println(<span class="string">"\t\t\tWithdraw"</span> + amount+<span class="string">"\t\t"</span>+getBalance());</div><div class="line">			&#125;catch(InterruptedException ex)&#123;</div><div class="line">				ex.printStackTrace();</div><div class="line">			&#125;finally &#123;</div><div class="line">				lock.unlock();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		public void deposit(int amount)&#123;</div><div class="line">			lock.lock();</div><div class="line">			try&#123;</div><div class="line">				balance += amount;</div><div class="line">				System.out.println(<span class="string">"Deposit"</span>+amount+<span class="string">"\t\t\t\t\t"</span>+getBalance());</div><div class="line">				newDeposit.signalAll();</div><div class="line">			&#125;finally &#123;</div><div class="line">				lock.unlock();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个Demo的场景就是有点像银行取钱的意思，一直在银行取钱和存钱，当取钱数额大于余额的时候，取钱这个线程就会await，等待存钱线程存钱的数额满足取钱数额后就会唤醒取钱线程。<br>注意：这个程序是有2个线程组成（除去主线程外），共享资源是Account实例，程序之所以一直在跑是因为2个线程一直在循环，lock是条件上的锁，共享的。<br>1、当把64行锁的释放注释掉的时候，程序就相当于只有存钱，取不了钱，因为newDeposit即使唤醒后取钱线程获取不了锁，当时之所有还能一直存钱，那是因为一直都是同一个线程，刚开始就已经拿到了锁，并一直占有。<br>2、当54行锁的释放注释掉的时候，发现程序和之前的没啥两样，一样存钱和取钱。因为即使取钱这个线程不释放锁，存钱这个线程还是同一个线程，取钱也一样，这时候要是还有其他线程想访问共享资源，因为锁的缘故就访问不了了。<br>3、45行while改成if。使用循环语句，当唤醒提款任务时候，线程还有重新检验的机会；当使用if的时候，判断结果可能还是还是true，那么线程可能会永久等待，也有可能继续往下执行，造成的结果就是不满足条件就往下执行，账号的余额为负数。</p>
+<p>加深理解在来个典型的消费者和生产者的例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line">package test.multithreading;</div><div class="line"></div><div class="line">import java.util.LinkedList;</div><div class="line">import java.util.concurrent.*;</div><div class="line">import java.util.concurrent.locks.*;</div><div class="line">public class Test &#123;</div><div class="line">	private static Buffer buffer = new Buffer();</div><div class="line">	public static void main(String[] args)&#123;</div><div class="line">		ExecutorService executor = Executors.newFixedThreadPool(2);</div><div class="line">		executor.execute(new ProducerTask());</div><div class="line">		executor.execute(new ConsumerTask());</div><div class="line">		executor.shutdown();</div><div class="line">	&#125;</div><div class="line">	private static class ProducerTask implements Runnable&#123;</div><div class="line">		@Override</div><div class="line">		public void <span class="function"><span class="title">run</span></span>() &#123;</div><div class="line">			try&#123;</div><div class="line">				int i = 1;</div><div class="line">				<span class="keyword">while</span>(<span class="literal">true</span>)&#123;</div><div class="line">					System.out.println(<span class="string">"Prodecer writes "</span>+i);</div><div class="line">					buffer.write(i++);</div><div class="line">					Thread.sleep((int)(Math.random() * 10000));</div><div class="line">				&#125;</div><div class="line">			&#125;catch(InterruptedException e)&#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	private static class ConsumerTask implements Runnable&#123;</div><div class="line">		@Override</div><div class="line">		public void <span class="function"><span class="title">run</span></span>() &#123;</div><div class="line">			try&#123;</div><div class="line">				<span class="keyword">while</span>(<span class="literal">true</span>)&#123;</div><div class="line">					System.out.println(<span class="string">"\t\t\tConsumer reads"</span> + buffer.read());</div><div class="line">					Thread.sleep((int)(Math.random() * 10000));</div><div class="line">				&#125;</div><div class="line">			&#125;catch(InterruptedException e)&#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	private static class Buffer&#123;</div><div class="line">		private static final int CAPACITY = 1;</div><div class="line">		private java.util.LinkedList&lt;Integer&gt; queue = new LinkedList&lt;Integer&gt;();</div><div class="line">		private static Lock lock = new ReentrantLock();</div><div class="line">		private static Condition notEmpty = lock.newCondition();</div><div class="line">		private static Condition notFull = lock.newCondition();</div><div class="line">		public void write(int value)&#123;</div><div class="line">			lock.lock();</div><div class="line">			try&#123;</div><div class="line">				<span class="keyword">while</span>(queue.size() == CAPACITY)&#123;</div><div class="line">					System.out.println(<span class="string">"Wait for notFull condition"</span>);</div><div class="line">					notFull.await();</div><div class="line">				&#125;</div><div class="line">				queue.offer(value);</div><div class="line">				notEmpty.signal();</div><div class="line">			&#125;catch(InterruptedException e)&#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;finally &#123;</div><div class="line">				lock.unlock();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		public int <span class="function"><span class="title">read</span></span>()&#123;</div><div class="line">			int value = 0;</div><div class="line">			lock.lock();</div><div class="line">			try&#123;</div><div class="line">				<span class="keyword">while</span>(queue.isEmpty())&#123;</div><div class="line">					System.out.println(<span class="string">"Wait for notEmpty condition"</span>);</div><div class="line">					notEmpty.await();</div><div class="line">				&#125;</div><div class="line">				value = queue.remove();</div><div class="line">				notFull.signal();</div><div class="line">				notEmpty.signal();</div><div class="line">			&#125;catch(InterruptedException e)&#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;finally &#123;</div><div class="line">				lock.unlock();</div><div class="line">				<span class="built_in">return</span> value;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="阻塞队列"><a href="#阻塞队列" class="headerlink" title="阻塞队列"></a>阻塞队列</h3><p>Java阻塞队列BlockingQueue接口扩展java.util.Queue,并且提供同步的put和take方法向队尾插入元素，满则等待；返回并删除对头元素，空则等待。<br>Java支持3个具体的阻塞队列ArrayBlockingQueue（可选公平性）、LinkedBlockingQueue（课创建不受限队列）和PriorityBlockingQueue（可创建不受限队列）。（都包含在java.util.concuttent包中），不受限队列，put永远不会阻塞。<br>这个使用这个实现上面的生产者消费者的Demo，就不需要添加显示锁来进行同步.</p>
+<h3 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h3><p>信号量Semaphore（位于java.util.concurrent包中）可以用来限制访问共享资源的线程数，在访问资源之前线程必须从信号量获取许可，访问之后，线程必须返回许可给信号量。<strong>只有一个许可的信号量可以用来模拟一个互相排斥的锁（以改写Demo11为例）</strong></p>
+<table>
+<thead>
+<tr>
+<th>Semaphore常用方法</th>
+<th style="text-align:right">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Semaphore(numberOfPermits:int)</td>
+<td style="text-align:right">创建指定数目的信号量，公平策略为false</td>
+</tr>
+<tr>
+<td>Semaphore(numberOfPermits:int，fair：boolean)</td>
+<td style="text-align:right">创建带数目信号量和公平策略的信号量</td>
+</tr>
+<tr>
+<td>acquire():void</td>
+<td style="text-align:right">获取这个信号量的许可。无许可可用，线程被锁住直到有许可可用为只</td>
+</tr>
+<tr>
+<td>release():void</td>
+<td style="text-align:right">释放一个许可给该信号量</td>
+</tr>
+</tbody>
+</table>
+<p>改写Account类的Demo：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">private static class Account&#123;</div><div class="line">    private static Semaphore semaphore = new Semaphore(1);</div><div class="line">    private int balance = 0;</div><div class="line">    public int <span class="function"><span class="title">getBalance</span></span>()&#123;</div><div class="line">        <span class="built_in">return</span> balance;</div><div class="line">    &#125;</div><div class="line">    public void deposit(int amount)&#123;</div><div class="line">        try&#123;</div><div class="line">            semaphore.acquire();</div><div class="line">            int newBalance = balance + amount;</div><div class="line">            Thread.sleep(5);</div><div class="line">            balance = newBalance;</div><div class="line">        &#125;catch(InterruptException e)&#123;&#125;</div><div class="line">        finally&#123;</div><div class="line">            semaphore.release();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>线程之间的通讯不止这样，还包括管道、命名管道、socket套接字等进行通信<br>线程可以划分为5状态：新建、就绪、运行、阻塞、结束（或者7态等）<br>死锁的4个必要条件：互斥、占有且等待、不可抢占、循环等待。</p>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:20px;">
+		-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
+		</div>
+    
+</div>
+  
+    </div>
+	
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>「小编写得辣么辛苦，不打赏一下么 /இAஇ~~」</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat-qcode.png" alt="尹文辉 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zhifubao-qcode.jpg" alt="尹文辉 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    尹文辉
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://williamywh.github.io/2018/04/06/thread2/" title="Java多线程(二)">http://williamywh.github.io/2018/04/06/thread2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/font-size-6-Java-Thread-font/" rel="tag"><i class="fa fa-tag"></i> <font size=6>Java Thread</font></a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/05/thread1/" rel="next" title="Java多线程(一)">
+                <i class="fa fa-chevron-left"></i> Java多线程(一)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="uyan_frame"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="尹文辉" />
+            
+              <p class="site-author-name" itemprop="name">尹文辉</p>
+              <p class="site-description motion-element" itemprop="description">学习交流</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/williamywh" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="976000584@qq.com.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+		  
+		  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=439915614&auto=0&height=66"></iframe>
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java多线程-二"><span class="nav-number">1.</span> <span class="nav-text">Java多线程(二)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池"><span class="nav-number">1.1.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程同步"><span class="nav-number">1.2.</span> <span class="nav-text">线程同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized关键字"><span class="nav-number">1.2.1.</span> <span class="nav-text">synchronized关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#同步语句"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">同步语句</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用加锁同步"><span class="nav-number">1.2.2.</span> <span class="nav-text">利用加锁同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程间协作"><span class="nav-number">1.2.3.</span> <span class="nav-text">线程间协作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阻塞队列"><span class="nav-number">1.2.4.</span> <span class="nav-text">阻塞队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量"><span class="nav-number">1.2.5.</span> <span class="nav-text">信号量</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">尹文辉</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2146451"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
